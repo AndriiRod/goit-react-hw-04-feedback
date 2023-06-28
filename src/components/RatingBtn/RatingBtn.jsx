@@ -1,4 +1,5 @@
 import { Btn } from './RatingBtn.styled';
+import PropTypes from 'prop-types';
 
 const RatingBtn = ({ name, changingValueState }) => {
   return (
@@ -11,3 +12,7 @@ const RatingBtn = ({ name, changingValueState }) => {
 };
 
 export default RatingBtn;
+
+RatingBtn.propTypes = {
+  changingValueState: PropTypes.func,
+};

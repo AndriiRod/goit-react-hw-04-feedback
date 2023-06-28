@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import RatingBtn from 'components/RatingBtn/';
 
 import { Ratings } from './RatingList.styled';
@@ -22,7 +21,3 @@ const RatingList = ({ changingValueState }) => {
 };
 
 export default RatingList;
-
-Ratings.propTypes = {
-  changingValueState: PropTypes.func,
-};
