@@ -1,5 +1,6 @@
 import Notification from 'components/Notification/';
 import StatisticsInfo from 'components/StatisticsInfo/';
+import PropTypes from 'prop-types';
 
 import { StatisticsWrap, SubTitle } from './Statistics.style';
 
@@ -21,3 +22,7 @@ const Statistics = ({ state, total, percentPositiveRev }) => {
 };
 
 export default Statistics;
+
+Statistics.propType = {
+  total: PropTypes.number,
+};

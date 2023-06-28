@@ -18,4 +18,5 @@ export default StatisticsInfo;
 
 StatisticsInfo.propTypes = {
   state: PropTypes.arrayOf(PropTypes.number),
+  percentPositiveRev: PropTypes.number,
 };
