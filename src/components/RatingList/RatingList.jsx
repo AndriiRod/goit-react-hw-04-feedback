@@ -3,7 +3,9 @@ import RatingBtn from 'components/RatingBtn/';
 
 import { Ratings } from './RatingList.styled';
 
-const RatingList = ({ btnNames, changingValueState }) => {
+const btnNames = ['good', 'neutral', 'bad'];
+
+const RatingList = ({ changingValueState }) => {
   return (
     <Ratings>
       {btnNames.map(name => {
@@ -22,5 +24,5 @@ const RatingList = ({ btnNames, changingValueState }) => {
 export default RatingList;
 
 Ratings.propTypes = {
-  btnNames: PropTypes.arrayOf(PropTypes.string),
+  changingValueState: PropTypes.func,
 };

@@ -1,46 +1,52 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 
 import Section from 'components/Section/';
 import RatingList from 'components/RatingList/';
 import Statistics from 'components/Statistics/';
 
-class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+const App = () => {
+  const [goodReview, setGoodReview] = useState(0);
+  const [neutralReview, setNeutralReview] = useState(0);
+  const [badReview, setBadReview] = useState(0);
+  const wholeState = [goodReview, neutralReview, badReview];
+
+  const changingStateIncrement = name => {
+    switch (name) {
+      case 'good':
+        setGoodReview(prevGood => prevGood + 1);
+        break;
+      case 'neutral':
+        setNeutralReview(prevNeutral => prevNeutral + 1);
+        break;
+      case 'bad':
+        setBadReview(prevBad => prevBad + 1);
+        break;
+      default:
+        break;
+    }
   };
 
-  changingValueState = name => {
-    this.setState(prevState => ({
-      [name]: prevState[name] + 1,
-    }));
-  };
-  countTotalFeedback = () => {
-    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
-  };
-  countPositiveFeedbackPercentage = () => {
-    const total = this.countTotalFeedback();
-    return total === 0 ? 0 : Math.round((this.state.good / total) * 100);
+  const countTotalFeedback = () => {
+    return wholeState.reduce((acc, currentValue) => acc + currentValue, 0);
   };
 
-  render() {
-    const total = this.countTotalFeedback();
-    const percentPositiveRev = this.countPositiveFeedbackPercentage();
-    return (
-      <Section title="Please leave feedback">
-        <RatingList
-          btnNames={Object.keys(this.state)}
-          changingValueState={this.changingValueState}
-        />
-        <Statistics
-          state={this.state}
-          total={total}
-          percentPositiveRev={percentPositiveRev}
-        />
-      </Section>
-    );
-  }
-}
+  const countPositiveFeedbackPercentage = () => {
+    return total === 0 ? 0 : Math.round((goodReview / total) * 100);
+  };
+
+  const total = countTotalFeedback();
+  const percentPositiveRev = countPositiveFeedbackPercentage();
+
+  return (
+    <Section title="Please leave feedback">
+      <RatingList changingValueState={changingStateIncrement} />
+      <Statistics
+        state={wholeState}
+        total={total}
+        percentPositiveRev={percentPositiveRev}
+      />
+    </Section>
+  );
+};
 
 export default App;
